@@ -17,13 +17,18 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v2
       with:
-        submodules: recursive
+        submodules: recursive 
+
+    - name: Set Up Git User
+      run: |
+        git config --global user.email "majdbitar2003@gmail.com" # Update with your email
+        git config --global user.name "Majdb15" # Update with your name
 
     - name: Update Submodules
       run: |
-        git submodule update --remote --merge
-        git add .
-        git commit -m "Automated update of submodules"
-        git push origin main
+        git submodule update --remote --merge # Update submodules
+        git add . # Stage changes
+        git commit -m "Automated update of submodules" || echo "No changes to commit" # Commit changes
+        git push origin main # Push changes to the repository
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Authenticate API requests
