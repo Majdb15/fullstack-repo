@@ -8,26 +8,35 @@ on:
       - 'frontend-repo/**'
       - 'backend-repo/**'
   schedule:
-    - cron: '0 0 * * *'  # Run daily at midnight
-  workflow_dispatch:  # Allow manual triggers from the Actions tab
+    - cron: '0 0 * * *'  # Run daily at midnight UTC
+  workflow_dispatch:  # Allows manual triggers from the Actions tab
 
 jobs:
   update-submodules:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout Repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
-        submodules: recursive 
+        submodules: recursive
 
     - name: Set Up Git User
       run: |
         git config --global user.email "majdbitar2003@gmail.com" # Update with your email
         git config --global user.name "Majdb15" # Update with your name
 
+    - name: Print Git Status
+      run: |
+        git status
+        git submodule status
+        git log --oneline --graph --decorate --all
+
     - name: Update Submodules
       run: |
-        git submodule update --remote --merge # Update submodules
+        git submodule update --remote --merge --allow-unrelated-histories # Update submodules with unrelated histories allowed
+        git status # Check for changes
         git add . # Stage changes
         git commit -m "Automated update of submodules" || echo "No changes to commit" # Commit changes
         git push origin main # Push changes to the repository
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Authenticate API requests
