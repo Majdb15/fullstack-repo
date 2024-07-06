@@ -2,13 +2,14 @@
 name: Update Submodules
 
 on:
-  pull_request:
+  push:
     paths:
       - '.gitmodules'
       - 'frontend-repo/**'
       - 'backend-repo/**'
   schedule:
-    - cron: '0 0 * * *' # Run daily at midnight
+    - cron: '0 0 * * *'  # Run daily at midnight
+  workflow_dispatch:  # Allow manual triggers from the Actions tab
 
 jobs:
   update-submodules:
