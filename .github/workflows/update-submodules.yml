@@ -18,12 +18,12 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v3
       with:
-        submodules: recursive
+        submodules: recursive  # Checkout submodules
 
     - name: Set Up Git User
       run: |
-        git config --global user.email "majdbitar2003@gmail.com" # Update with your email
-        git config --global user.name "Majdb15" # Update with your name
+        git config --global user.email "majdbitar2003@gmail.com"  # Update with your email
+        git config --global user.name "Majdb15"  # Update with your name
 
     - name: Print Git Status
       run: |
@@ -33,10 +33,11 @@ jobs:
 
     - name: Update Submodules
       run: |
-        git submodule update --remote --merge --allow-unrelated-histories # Update submodules with unrelated histories allowed
-        git status # Check for changes
-        git add . # Stage changes
-        git commit -m "Automated update of submodules" || echo "No changes to commit" # Commit changes
-        git push origin main # Push changes to the repository
+        git submodule sync  # Synchronize submodule URLs
+        git submodule update --init --recursive --remote  # Update submodules
+        git status  # Check for changes
+        git add .  # Stage changes
+        git commit -m "Automated update of submodules" || echo "No changes to commit"  # Commit changes
+        git push origin main  # Push changes to the repository
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Authenticate API requests
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Authenticate API requests
