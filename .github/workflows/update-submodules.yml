@@ -31,5 +31,3 @@ jobs:
         git add . # Stage changes
         git commit -m "Automated update of submodules" || echo "No changes to commit" # Commit changes
         git push origin main # Push changes to the repository
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Authenticate API requests
