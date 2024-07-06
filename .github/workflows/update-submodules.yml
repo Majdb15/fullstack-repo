@@ -1,0 +1,29 @@
+# .github/workflows/update-submodules.yml
+name: Update Submodules
+
+on:
+  push:
+    paths:
+      - '.gitmodules'
+      - 'frontend-repo/**'
+      - 'backend-repo/**'
+  schedule:
+    - cron: '0 0 * * *' # Run daily at midnight
+
+jobs:
+  update-submodules:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+      with:
+        submodules: recursive
+
+    - name: Update Submodules
+      run: |
+        git submodule update --remote --merge
+        git add .
+        git commit -m "Automated update of submodules"
+        git push origin main
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
