@@ -2,7 +2,7 @@
 name: Update Submodules
 
 on:
-  push:
+  pull_request:
     paths:
       - '.gitmodules'
       - 'frontend-repo/**'
