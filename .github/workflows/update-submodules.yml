@@ -5,7 +5,7 @@ on:
     paths:
       - '.gitmodules'
       - 'frontend-repo/**'
-      - 'backend-repo/**'
+      - 'backend-repo/**' #d
   schedule:
     - cron: '0 0 * * *' # Run daily at midnight
   workflow_dispatch: # Allows manual triggers from the Actions tab
