@@ -18,7 +18,7 @@ jobs:
       uses: actions/checkout@v2
       with:
         submodules: recursive # Checkout submodules
-        token: ${{ secrets.NOTGITHUB_TOKEN }} # Provide the token for authentication
+        #token: ${{ secrets.NOTGITHUB_TOKEN }} # Provide the token for authentication
 
     - name: Set Up Git User
       run: |
@@ -39,5 +39,6 @@ jobs:
         git add . # Stage changes
         git commit -m "Automated update of submodules" || echo "No changes to commit" # Commit changes
         git push origin main # Push changes to the repository
-      env:
-        GITHUB_TOKEN: ${{ secrets.NOTGITHUB_TOKEN }} # Authenticate API requests
+      
+      #env:
+        #GITHUB_TOKEN: ${{ secrets.NOTGITHUB_TOKEN }} # Authenticate API requests
