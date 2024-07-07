@@ -11,7 +11,7 @@ Here are the followed steps:
 ---
 5-Created the config.yaml file, added variables to this config file tha should be read by both submodule repos
 ---
-6-Created a github workflow that ensures that any change applied to one of the frontend-repo or backend-repo is directly reflected to the repo specific file inside the fullstack-repo, then all we have to do is one push on the main repo and all changes will be synced or activate the workflow from the github actions
+6-Created a github workflow that ensures that any change applied to one of the frontend-repo or backend-repo is directly reflected to the repo specific file inside the fullstack-repo, then all we have to do is activate the workflow from the github actions then pull to main
 ---
 7-update client.py file in frontend-repo and comfirm that the updates are automated and shown in fullstack-repo aswell ✔
 ---
